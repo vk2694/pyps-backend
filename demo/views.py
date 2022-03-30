@@ -60,7 +60,7 @@ class projectCRUD(View):
     # Get the Project list
     def get(self, request):
         try:
-            projectList = Projects.objects.all()
+            projectList = list(Projects.objects.select_related('user_id').values('id', 'name', 'user_id__name'))
         except Exception as e:
             raise e
 
